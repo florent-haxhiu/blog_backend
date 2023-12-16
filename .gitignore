@@ -3,3 +3,8 @@ poetry.lock
 
 terraform/*terraform*
 terraform/terraform.tfstate
+
+build/*
+dist/*
+package/*
+artifact.zip
