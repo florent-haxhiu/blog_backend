@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ..
-
 poetry build
 poetry run pip install --upgrade -t package dist/*.whl
 cd package || exit
