@@ -4,6 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["Florent Haxhiu <florenthaxhiu03@gmail.com>"]
 readme = "README.md"
+packages = [
+    { include = "blog" }
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -11,6 +15,16 @@ boto3 = "^1.34.2"
 moto = "^4.2.11"
 pydantic = "^2.5.2"
 aws-lambda-powertools = "^2.30.1"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+reportUnknownParameterType = true
+reportUntypedFunctionDecorator = true
+
+reportMissingImports = true
+reportMissingTypeStubs = true
 
 [build-system]
 requires = ["poetry-core"]
