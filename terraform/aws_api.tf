@@ -1,9 +1,9 @@
 resource "aws_api_gateway_rest_api" "blog_api" {
   name = "blogAPI"
-  body = jsonencode(templatefile("../interface/api.yaml", {
-    blogHandlerARN  = aws_lambda_function.blog_handler.arn,
-    region          = data.aws_region.current
-  }))
+  body = templatefile("../interface/api.yaml", {
+    blogHandlerARN = aws_lambda_function.blog_handler.arn,
+    region         = var.aws_region
+  })
 
   endpoint_configuration {
     types = ["REGIONAL"]

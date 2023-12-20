@@ -11,7 +11,7 @@ paths:
         "200":
           description: "OK"
       x-amazon-apigateway-integration:
-        passthroughBehavior: "when_no_match"
+        passthroughBehavior: "when_no_template"
         httpMethod: "GET"
         uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
         type: "aws"
@@ -23,7 +23,7 @@ paths:
         "201":
           description: "Created"
       x-amazon-apigateway-integration:
-        passthroughBehavior: "when_no_match"
+        passthroughBehavior: "when_no_template"
         httpMethod: "POST"
         uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
         type: "aws"
@@ -43,7 +43,7 @@ paths:
         "200":
           description: "OK"
       x-amazon-apigateway-integration:
-        passthroughBehavior: "when_no_match"
+        passthroughBehavior: "when_no_template"
         httpMethod: "GET"
         uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
         type: "aws"
