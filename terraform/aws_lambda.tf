@@ -7,6 +7,9 @@ resource "aws_lambda_function" "blog_handler" {
   filename      = aws_lambda_layer_version.lambda_layer.filename
   layers        = [aws_lambda_layer_version.lambda_layer.arn]
   depends_on    = [aws_iam_role_policy_attachment.lambda_logs_attachment]
+  tracing_config {
+    mode = "Active"
+  }
 }
 
 resource "aws_lambda_layer_version" "lambda_layer" {
