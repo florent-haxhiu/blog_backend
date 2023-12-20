@@ -1,4 +1,3 @@
-
 resource "aws_lambda_function" "blog_handler" {
   function_name = "blog_lambda_handler"
   role          = aws_iam_role.lambda_role.arn
