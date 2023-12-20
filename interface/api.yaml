@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: Blog API
+  version: 0.0.1
+paths:
+  /blog:
+    get:
+      summary: Get all blogs
+      description: Retrieves all blogs
+      responses:
+        "200":
+          description: "OK"
+      x-amazon-apigateway-integration:
+        passthroughBehavior: "when_no_match"
+        httpMethod: "GET"
+        uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
+        type: "aws"
+    post:
+      summary: Create specific blog
+      requestBody:
+        $ref: "#/components/requestBodies/Blog"
+      responses:
+        "201":
+          description: "Created"
+      x-amazon-apigateway-integration:
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
+        type: "aws"
+
+  /blog/{id}:
+    get:
+      summary: Get specific blog
+      description: Get specific blog
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: uuid
+      responses:
+        "200":
+          description: "OK"
+      x-amazon-apigateway-integration:
+        passthroughBehavior: "when_no_match"
+        httpMethod: "GET"
+        uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
+        type: "aws"
+
+components:
+  schemas:
+    Blog:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 49af1141-d93d-4231-bbc0-7c400dfe445c
+        title:
+          type: string
+          example: My title
+        blogBody:
+          type: string
+        timestamp:
+          type: integer
+          description: Unix seconds
+
+  requestBodies:
+    Blog:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Blog"
