@@ -20,8 +20,8 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/Blog"
       responses:
-        "201":
-          description: "Created"
+        "200":
+          description: "OK"
       x-amazon-apigateway-integration:
         passthroughBehavior: "when_no_templates"
         httpMethod: "POST"
