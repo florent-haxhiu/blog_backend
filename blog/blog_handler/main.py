@@ -4,8 +4,7 @@ logger = aws_lambda_powertools.Logger()
 
 
 def lambda_handler(event, context):
-    logger.info('HELLO WORLD')
+    logger.info(event)
     return {
-        'statusCode': 200,
-        'message': 'Hello World'
+            'message': 'boo'
     }
