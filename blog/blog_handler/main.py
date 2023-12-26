@@ -1,10 +1,15 @@
 import aws_lambda_powertools
+import fastapi
+import mangum
 
 logger = aws_lambda_powertools.Logger()
 
+app = fastapi.FastAPI()
 
-def lambda_handler(event, context):
-    logger.info(event)
-    return {
-            'message': 'boo'
-    }
+
+@app.get('/')
+async def return_hello_world():
+    return {'message': 'Hello World'}
+
+
+handler = mangum.Mangum(app)
