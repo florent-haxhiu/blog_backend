@@ -1,15 +1,21 @@
 resource "aws_lambda_function" "blog_handler" {
   function_name = "blog_lambda_handler"
-  role          = aws_iam_role.lambda_role.arn
-  handler       = "blog.blog_handler.main.lambda_handler"
-  timeout       = 10
-  runtime       = "python3.11"
-  filename      = aws_lambda_layer_version.lambda_layer.filename
-  layers        = [aws_lambda_layer_version.lambda_layer.arn]
-  depends_on    = [aws_iam_role_policy_attachment.lambda_logs_attachment]
+
+  role = aws_iam_role.lambda_role.arn
+
+  handler = "blog.blog_handler.main.handler"
+  runtime = "python3.11"
+
+  filename = aws_lambda_layer_version.lambda_layer.filename
+  layers   = [aws_lambda_layer_version.lambda_layer.arn]
+
+  depends_on = [aws_iam_role_policy_attachment.lambda_logs_attachment]
+
   tracing_config {
     mode = "Active"
   }
+
+  timeout = 10
 }
 
 resource "aws_lambda_layer_version" "lambda_layer" {

@@ -9,24 +9,25 @@ paths:
       description: Retrieves all blogs
       responses:
         "200":
-          description: "OK"
+          $ref: "#/components/requestBodies/BlogsResponse"
       x-amazon-apigateway-integration:
-        passthroughBehavior: "when_no_templates"
+        passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
-        type: "aws"
+        type: "aws_proxy"
+
     post:
       summary: Create specific blog
       requestBody:
         $ref: "#/components/requestBodies/Blog"
       responses:
         "200":
-          description: "OK"
+          $ref: "#/components/requestBodies/BlogCreated"
       x-amazon-apigateway-integration:
-        passthroughBehavior: "when_no_templates"
+        passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
-        type: "aws"
+        type: "aws_proxy"
 
   /blog/{id}:
     get:
@@ -37,16 +38,16 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
             format: uuid
       responses:
         "200":
-          description: "OK"
+          $ref: "#/components/requestBodies/BlogsResponse"
       x-amazon-apigateway-integration:
-        passthroughBehavior: "when_no_templates"
+        passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${blogHandlerARN}/invocations"
-        type: "aws"
+        type: "aws_proxy"
 
 components:
   schemas:
@@ -64,10 +65,32 @@ components:
         timestamp:
           type: integer
           description: Unix seconds
-
+    BlogCreated:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Blog has successfully been created"
+        blogId:
+          type: string
+          format: uuid
   requestBodies:
     Blog:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Blog"
+    BlogsResponse:
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Blog"
+    BlogCreated:
+      description: "Blog Created"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BlogCreated"
