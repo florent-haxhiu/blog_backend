@@ -1,15 +1,17 @@
+from typing import Dict, Union
+import json
 import aws_lambda_powertools
-import fastapi
-import mangum
+import aws_lambda_powertools.utilities.typing as aws_types
 
-from routes import blog, auth
+from blog_handler.models import BlogModel
 
 logger = aws_lambda_powertools.Logger()
 
-app = fastapi.FastAPI()
 
-app.include_router(auth.router)
-app.include_router(blog.router)
-
-
-handler = mangum.Mangum(app)
+def lambda_handler(context: aws_types.LambdaContext, event: Dict[str, str]) -> Dict[str, Union[str, int]]:
+    logger.info('Received ', event['body'])
+    body: BlogModel = json.loads(event['body'])
+    return {
+        'statusCode': 200,
+        'body': json.dumps({'hello': 'world'})
+    }
