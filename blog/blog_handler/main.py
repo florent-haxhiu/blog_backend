@@ -14,9 +14,9 @@ def lambda_handler(context: aws_types.LambdaContext, event: Dict[str, str]) -> D
     logger.info('Received ', event['body'])
     body: BlogModel = json.loads(event['body'])
 
-    dynamodb_client = boto3.client('dynamodb')
+    dynamodb_client = boto3.resource('dynamodb')
 
-    handler = DynamoDbHandler(client=dynamodb_client)
+    handler = DynamoDbHandler(table=dynamodb_client)
 
     return {
         'statusCode': 200,
