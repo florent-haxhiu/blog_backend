@@ -3,7 +3,7 @@ resource "aws_lambda_function" "blog_handler" {
 
   role = aws_iam_role.lambda_role.arn
 
-  handler = "blog.blog_handler.main.handler"
+  handler = "blog.blog_handler.main.lambda_handler"
   runtime = "python3.11"
 
   filename = aws_lambda_layer_version.lambda_layer.filename
