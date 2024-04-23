@@ -6,5 +6,4 @@ resource "aws_dynamodb_table" "blogs" {
     name = "blogId"
     type = "S"
   }
-
 }
