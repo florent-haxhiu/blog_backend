@@ -8,3 +8,5 @@ build/*
 dist/*
 package/*
 artifact.zip
+
+*/*/__pycache__/*
