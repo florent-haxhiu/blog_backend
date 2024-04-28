@@ -6,3 +6,7 @@ class BlogModel(TypedDict):
     title: str
     blogBody: str
     timestamp: int
+
+
+class GetBlogModel(TypedDict):
+    id: int
