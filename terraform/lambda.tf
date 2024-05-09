@@ -15,6 +15,12 @@ resource "aws_lambda_function" "blog_handler" {
     mode = "Active"
   }
 
+  environment {
+    variables = {
+      dbTableName = aws_dynamodb_table.blogs.name
+    }
+  }
+
   timeout = 10
 }
 
