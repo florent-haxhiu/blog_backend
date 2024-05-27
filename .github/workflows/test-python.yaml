@@ -26,7 +26,7 @@ jobs:
         poetry install
     - name: Lint with flake8
       run: |
-        poetry run tox -re py-flake8
+        tox -re py-flake8
     - name: Test with pytest
       run: |
-        poetry run tox -re py-unit
+        tox -re py-unit
