@@ -9,4 +9,7 @@ dist/*
 package/*
 artifact.zip
 
-*/*/__pycache__/*
+*/__pycache__
+*/*/__pycache__
+*/*/*/__pycache__/*
+.tox/
